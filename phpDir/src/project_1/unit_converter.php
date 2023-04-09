@@ -6,11 +6,12 @@
 </head>
 <body>
 	<h1>Measurement Conversion</h1>
+  <section>
 	<h2>Temperature</h2>
 	<form method="post">
 		<label for="celsius">Celsius:</label>
-		<input type="number" name="celsius" id="celsius">
-		<input type="submit" name="convert_celsius" value="Convert to Fahrenheit">
+		<input type="number" name="celsius" id="celsius" placeholder="°C">
+		<input type="submit" name="convert_celsius" value="Convert to Fahrenheit" >
 		<input type="submit" name="convert_kelvin" value="Convert to Kelvin">
 	</form>
 
@@ -27,40 +28,45 @@
 		echo "<p>" . $celsius . " Celsius is " . $kelvin . " Kelvin.</p>";
 	}
 	?>
-
+  </section>
+<section id="speed">
 	<h2>Speed</h2>
 	<form method="post">
 		<label for="kmh">Kilometers per hour:</label>
-		<input type="number" name="kmh" id="kmh">
+		<input type="number" name="kmh" id="kmh" placeholder="km/h">
 		<input type="submit" name="convert_kmh" value="Convert to meters per second">
 		<input type="submit" name="convert_knots" value="Convert to knots">
 	</form>
-
 	<?php
 	if(isset($_POST['convert_kmh'])){
-		$kmh = $_POST['kmh'];
+    $kmh = $_POST['kmh'];
 		$meters_per_second = $kmh * 0.277778;
 		echo "<p>" . $kmh . " kilometers per hour is " . $meters_per_second . " meters per second.</p>";
 	}
-
+  
 	if(isset($_POST['convert_knots'])){
-		$kmh = $_POST['kmh'];
+    $kmh = $_POST['kmh'];
 		$knots = $kmh * 0.539957;
 		echo "<p>" . $kmh . " kilometers per hour is " . $knots . " knots.</p>";
 	}
 	?>
-
+  </section>
+<section>
 	<h2>Mass</h2>
-	<form method="post">
-		<label for="kg">Kilograms:</label>
-		<input type="number" name="kg" id="kg">
-		<input type="submit" name="convert_kg" value="Convert to grams">
-    <br>
-    <label for="g">Grams:</label>
-    <input type="number" name="g" id="g">
-		<input type="submit" name="convert_g" value="Convert to kilograms">
-	</form>
-
+  <form method="post">
+    <div id=mass>
+    <div>
+        <label for="kg">Kilograms:</label>
+        <input type="number" name="kg" id="kg" placeholder="kg">
+        <input type="submit" name="convert_kg" value="Convert to grams">
+    </div>
+    <div>
+        <label for="g">Grams:</label>
+        <input type="number" name="g" id="g" placeholder="g">
+        <input type="submit" name="convert_g" value="Convert to kilograms">
+    </div>
+    </div>
+</form>
 	<?php
 	if(isset($_POST['convert_kg'])){
 		$kg = $_POST['kg'];
@@ -74,5 +80,6 @@
 		echo "<p>" . $kg . " grams is " . $kilograms . " kilograms.</p>";
 	}
 	?>
+  </section>
 </body>
 </html>
