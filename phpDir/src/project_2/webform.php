@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="email" class="form-label">Your Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="jane@doe.com" tabindex="2" required>
+                <input type="text" class="form-control" id="email" name="email" placeholder="jane@doe.com" tabindex="2" required>
             </div>
             <div class="form-group">
                 <label for="subject" class="form-label">Subject</label>
@@ -37,16 +37,21 @@
 </html>
 
 <?php
-//collect the form data
+//collect the form data, and remove leading and trailing whitespaces (trim) and sanitize for html output (htmlspecialchars)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = $_POST["name"];
-  $email = $_POST["email"];
-  $subject = $_POST["subject"];
-  $message = $_POST["message"];
+  $name = trim(htmlspecialchars($_POST["name"]));
+  $email = trim(htmlspecialchars($_POST["email"]));
+  $subject = trim(htmlspecialchars($_POST["subject"]));
+  $message = trim(htmlspecialchars($_POST["message"]));
 
     // Validate email address
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       echo "Invalid email format";
     }
+    // Check the sanitied data in the console
+    echo "<script>console.log('Sanitized name: " . $name . "');</script>";
+    echo "<script>console.log('Sanitized email: " . $email . "');</script>";
+    echo "<script>console.log('Sanitized subject: " . $subject . "');</script>";
+    echo "<script>console.log('Sanitized message: " . $message . "');</script>";
 }
 ?>
