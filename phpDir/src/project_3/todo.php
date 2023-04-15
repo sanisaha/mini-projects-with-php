@@ -61,7 +61,7 @@ if(isset($_POST['edit_todo'])) {
                 <label for='edit-title'>Title:</label>
                 <input id='edit-title' type='text' name='title' placeholder='Title' value='" . $row["title"] . "' required><br>
                 <label for='edit-description'>Description:</label>
-                <textarea id='edit-description' name='description' placeholder='Description' required>" . $row["description"] . "</textarea><br>
+                <textarea id='edit-description' name='description' placeholder='Description'>" . $row["description"] . "</textarea><br>
                 <button type='submit' name='update_todo'>Update Todo</button>
               </form>
             </div>";
@@ -114,8 +114,8 @@ $conn->close();
   <div class="container">
 <!-- HTML FORM TO CREATE A NEW TODO -->
  <form method="POST" id="create">
-  <input type="text" name="title" placeholder="Title" required><br>
-  <textarea name="description" placeholder="Description" required></textarea><br>
+  <input type="text" name="title" placeholder="The task" required><br>
+  <textarea name="description" placeholder="Description (optional)"></textarea><br>
   <button type="submit" name="create_todo">Create Todo</button>
 </form>
 </div>
