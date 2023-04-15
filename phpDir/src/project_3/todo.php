@@ -11,9 +11,8 @@ $conn = new mysqli($host, $user, $pass, $dbname);
 if(isset($_POST['create_todo'])) {
   $title = $_POST['title'];
   $description = $_POST['description'];
-  $status = $_POST['status'];
 
-  $sql = "INSERT INTO tasks (title, description, status) VALUES ('$title', '$description', '$status')";
+  $sql = "INSERT INTO tasks (title, description) VALUES ('$title', '$description')";
   if($conn->query($sql) === TRUE) {
       echo "Todo created successfully";
   } else {
@@ -45,6 +44,7 @@ if(isset($_POST['delete_todo'])) {
   }
 }
 
+//display editing options when clicking edit
 if(isset($_POST['edit_todo'])) {
   $id = $_POST['id'];
   $sql = "SELECT * FROM tasks WHERE id='$id'";
@@ -71,7 +71,7 @@ if(isset($_POST['edit_todo'])) {
   }
 }
 
-// display tasks
+// display all tasks
 $sql = "SELECT * FROM tasks";
 $result = $conn->query($sql);
 
@@ -85,7 +85,6 @@ if ($result === false) {
           <div class='todo-card'>
             <h3>" . $row["title"] . "</h3>
             <p>" . $row["description"] . "</p>
-            <p>Status: " . ($row["status"] ? 'Completed' : 'Not completed') . "</p>
             <form method='POST'>
               <input type='hidden' name='id' value='" . $row["id"] . "'>
               <button type='submit' name='delete_todo' id='delete'>Delete</button>
@@ -117,14 +116,8 @@ $conn->close();
  <form method="POST" id="create">
   <input type="text" name="title" placeholder="Title" required><br>
   <textarea name="description" placeholder="Description" required></textarea><br>
-  <input type="hidden" name="status" value="0">
   <button type="submit" name="create_todo">Create Todo</button>
 </form>
 </div>
 </body>
 </html>
-
-
-
-
-

@@ -1,17 +1,12 @@
-/* Set a background color and font family for the entire app */
 body {
   background-color: #f6f6f6;
   font-family: Arial, sans-serif;
 }
-
-/* Center the container and give it some padding */
 .container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
-
-/* Style the forms */
 #create,
 #editform {
   background-color: #ffffff;
@@ -41,17 +36,12 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
-
-.completed {
-  color: #aaa;
-  text-decoration: line-through;
-}
 .todo-card {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 20px;
   margin-bottom: 10px;
-  position: relative; /* Add position relative to the container */
+  position: relative;
   background-color: white;
 }
 
@@ -60,9 +50,9 @@ h3 {
 }
 
 #edit {
-  position: absolute; /* Set the edit button to absolute position */
-  bottom: 5px; /* Set the distance from the top */
-  left: 5px; /* Set the distance from the right */
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
   background-color: #4caf50;
   border: none;
   color: white;
