@@ -7,6 +7,12 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
+.todo-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
 #create,
 #editform {
   background-color: #ffffff;
@@ -42,7 +48,7 @@ button {
   padding: 20px;
   margin-bottom: 10px;
   position: relative;
-  background-color: white;
+  background-color: salmon;
 }
 
 h3 {

@@ -14,7 +14,7 @@ if(isset($_POST['create_todo'])) {
 
   $sql = "INSERT INTO tasks (title, description) VALUES ('$title', '$description')";
   if($conn->query($sql) === TRUE) {
-      echo "Todo created successfully";
+    echo '<script>alert("Todo created successfully")</script>';
   } else {
       echo "Error creating todo: " . $conn->error;
   }
@@ -27,7 +27,7 @@ if(isset($_POST['update_todo'])) {
 
   $sql = "UPDATE tasks SET title='$title', description='$description' WHERE id='$id'";
   if($conn->query($sql) === TRUE) {
-      echo "Todo updated successfully";
+    echo '<script>alert("Todo updated successfully")</script>';
   } else {
       echo "Error updating todo: " . $conn->error;
   }
@@ -38,7 +38,7 @@ if(isset($_POST['delete_todo'])) {
 
   $sql = "DELETE FROM tasks WHERE id='$id'";
   if($conn->query($sql) === TRUE) {
-      echo "Todo deleted successfully";
+    echo '<script>alert("Todo deleted successfully")</script>';
   } else {
       echo "Error deleting todo: " . $conn->error;
   }
@@ -75,42 +75,45 @@ if(isset($_POST['edit_todo'])) {
 $sql = "SELECT * FROM tasks";
 $result = $conn->query($sql);
 
-if ($result === false) {
-  echo "Error fetching tasks: " . $conn->error;
-} else {
-  if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      echo "
-        <div class='container'>
-          <div class='todo-card'>
-            <h3>" . $row["title"] . "</h3>
-            <p>" . $row["description"] . "</p>
-            <form method='POST'>
-              <input type='hidden' name='id' value='" . $row["id"] . "'>
-              <button type='submit' name='delete_todo' id='delete'>Delete</button>
-            </form>
-            <form method='POST' action='todo.php'>
-              <input type='hidden' name='id' value='" . $row["id"] . "'>
-              <button type='submit' name='edit_todo' id='edit'>Edit</button>
-            </form>
-          </div>
-        </div>
-      ";
-    }
-  } else {
-      echo "No tasks found";
-  }
-}
-
 $conn->close();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Todo App</title>
-  <link rel="stylesheet" href="todo.css">
+  <style>
+  <?php include "todo.css" ?>
+</style>
 </head>
 <body>
+    <div class="todo-container">
+        <?php
+        if ($result === false) {
+          echo "Error fetching tasks: " . $conn->error;
+        } else {
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              echo "
+                  <div class='todo-card'>
+                    <h3>" . $row["title"] . "</h3>
+                    <p>" . $row["description"] . "</p>
+                    <form method='POST'>
+                      <input type='hidden' name='id' value='" . $row["id"] . "'>
+                      <button type='submit' name='delete_todo' id='delete'>Delete</button>
+                    </form>
+                    <form method='POST' action='todo.php'>
+                      <input type='hidden' name='id' value='" . $row["id"] . "'>
+                      <button type='submit' name='edit_todo' id='edit'>Edit</button>
+                    </form>
+                  </div>
+              ";
+            }
+          } else {
+              echo "No tasks found";
+          }
+        }
+        ?>
+    </div>
   <div class="container">
 <!-- HTML FORM TO CREATE A NEW TODO -->
  <form method="POST" id="create">
