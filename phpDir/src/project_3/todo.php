@@ -12,7 +12,7 @@ if(isset($_POST['create_todo'])) {
   $title = $_POST['title'];
   $description = $_POST['description'];
 
-  $sql = "INSERT INTO tasks (title, description) VALUES ('$title', '$description')";
+  $sql = "INSERT INTO tasks (title, description) VALUES ('$title', \"$description\")";
   if($conn->query($sql) === TRUE) {
     echo '<script>alert("Todo created successfully")</script>';
   } else {
@@ -87,6 +87,7 @@ $conn->close();
 </head>
 <body>
     <div class="todo-container">
+      <!-- add new Todo in a grid container -->
         <?php
         if ($result === false) {
           echo "Error fetching tasks: " . $conn->error;
